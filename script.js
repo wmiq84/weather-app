@@ -15,8 +15,6 @@ class Weather {
 		const { temp, humidity, precip, windSpeed } =
 			this.weatherData.currentConditions;
 
-		console.log(temp, humidity, precip, windSpeed);
-
 		return {
 			temp,
 			humidity,
@@ -28,11 +26,12 @@ class Weather {
 
 const input = document.querySelector('input');
 const button = document.querySelector('button');
+const output = document.querySelector('#output');
 
+button.addEventListener('click', async () => {
+	const inputText = input.value;
+	const weatherInstance = new Weather();
+	const weatherOutput = await weatherInstance.getData(inputText);
 
-button.addEventListener('click', () => {
-    const inputText = input.value;
-    const weatherInstance = new Weather();
-    weatherInstance.getData(inputText);
+	output.textContent = `Temperature: ${weatherOutput.temp}F, Humidity: ${weatherOutput.humidity}%, Precipitation: ${weatherOutput.precip} inches, Wind Speed: ${weatherOutput.windSpeed} mph`;
 });
-
